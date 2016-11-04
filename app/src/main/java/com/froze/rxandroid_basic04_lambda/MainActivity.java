@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 doFlatMap();
                 break;
             case R.id.button4:
+                doZip();
                 break;
         }
     }
@@ -92,5 +93,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         e -> e.printStackTrace(),
                         () -> adapter.notifyDataSetChanged()
                 );
+    }
+
+    public void doZip(){
+        Observable.zip(
+                Observable.just("KIM HYOJUNG"),
+                Observable.just("image.jpg"),
+                (item1, item2) -> "Name:"+item1 + ", Profile image"+item2
+        ).subscribe(
+                zipped -> Log.w(TAG, "onNext item ="+zipped)
+        );
     }
 }
